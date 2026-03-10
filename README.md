@@ -1,1 +1,1 @@
-site: https://illcher.github.io/FalloutNVTools/UniqueTrackerFalloutNV.html
+site: <https://illcher.github.io/FalloutNVTools/UniqueTrackerFalloutNV.html>
