@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fallout: New Vegas - UNIQUE Weapons Tracker (Permanent Collection)</title>
+    <title>Fallout: New Vegas - UNIQUE Weapons Tracker</title>
     <style>
         * {
             box-sizing: border-box;
@@ -19,7 +19,7 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background-color: rgba(20, 20, 20, 0.9);
             border: 3px solid #7b7b7b;
@@ -54,11 +54,11 @@
             background-color: #2a2a2a;
             border: 2px solid #6a6a6a;
             border-radius: 8px;
-            padding: 15px;
+            padding: 20px;
             margin-bottom: 20px;
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
             gap: 15px;
             box-shadow: inset 0 0 15px #000000;
         }
@@ -66,14 +66,15 @@
         .stat-box {
             text-align: center;
             flex: 1;
-            min-width: 120px;
+            padding: 0 5px;
         }
         
         .stat-label {
             color: #a0a0a0;
-            font-size: 0.9em;
+            font-size: 0.8em;
             text-transform: uppercase;
             letter-spacing: 1px;
+            white-space: nowrap;
         }
         
         .stat-value {
@@ -82,12 +83,14 @@
             font-weight: bold;
             font-family: 'Impact', 'Courier New', monospace;
             text-shadow: 2px 2px 0 #3a3a3a;
+            line-height: 1.2;
         }
         
         .stat-note {
             color: #8a8a8a;
-            font-size: 0.8em;
+            font-size: 0.7em;
             font-style: italic;
+            white-space: nowrap;
         }
         
         .pip-boy-screen {
@@ -95,7 +98,7 @@
             color: #bfffbf;
             border: 4px solid #5f8b5f;
             border-radius: 10px;
-            padding: 15px;
+            padding: 12px 20px;
             margin-bottom: 20px;
             font-family: 'VT323', 'Courier New', monospace;
             font-size: 1.1em;
@@ -114,19 +117,20 @@
             flex-wrap: wrap;
             align-items: center;
             background-color: #2a2a2a;
-            padding: 10px;
-            border-radius: 5px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #5a5a5a;
         }
         
         .search-box {
-            flex: 1;
-            min-width: 200px;
+            flex: 2;
+            min-width: 250px;
             background-color: #1a1a1a;
             border: 1px solid #5a5a5a;
             color: #c0c0c0;
             padding: 8px 12px;
-            border-radius: 3px;
-            font-size: 1em;
+            border-radius: 4px;
+            font-size: 0.95em;
         }
         
         .search-box:focus {
@@ -139,10 +143,11 @@
             color: #ffb3b3;
             border: 1px solid #a05a5a;
             padding: 8px 15px;
-            border-radius: 3px;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 0.9em;
             font-weight: bold;
+            transition: all 0.2s;
         }
         
         .reset-btn:hover {
@@ -153,8 +158,8 @@
             display: flex;
             gap: 5px;
             background-color: #1a1a1a;
-            padding: 5px;
-            border-radius: 5px;
+            padding: 4px;
+            border-radius: 6px;
             border: 1px solid #5a5a5a;
         }
         
@@ -162,11 +167,12 @@
             background-color: transparent;
             color: #a0a0a0;
             border: none;
-            padding: 5px 10px;
+            padding: 6px 12px;
             cursor: pointer;
-            border-radius: 3px;
+            border-radius: 4px;
             font-weight: bold;
             transition: all 0.2s;
+            font-size: 0.9em;
         }
         
         .view-btn:hover {
@@ -188,7 +194,6 @@
             border: 2px solid #5f8b5f;
             cursor: pointer;
             transition: all 0.2s;
-            margin-left: auto;
         }
         
         .wild-toggle:hover {
@@ -241,56 +246,55 @@
             text-transform: uppercase;
             font-size: 0.9em;
             letter-spacing: 1px;
+            white-space: nowrap;
+        }
+        
+        .perk-note, .warning-note {
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .perk-note {
             background-color: #1a3a3a;
             border: 1px solid #5f8b8b;
-            padding: 8px 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
             color: #7fc9c9;
-            font-size: 0.9em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .perk-note .icon {
-            font-size: 1.5em;
         }
         
         .warning-note {
             background-color: #3a2a1a;
             border: 1px solid #d4a017;
-            padding: 8px 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
             color: #d4a017;
-            font-size: 0.9em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
         
-        .warning-note .icon {
-            font-size: 1.5em;
+        .perk-note .icon, .warning-note .icon {
+            font-size: 1.3em;
+        }
+        
+        .categories-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
         
         .category-section {
-            margin-bottom: 25px;
             border: 1px solid #5a5a5a;
-            border-radius: 5px;
+            border-radius: 8px;
             overflow: hidden;
+            background-color: #1f1f1f;
         }
         
         .category-header {
             background-color: #2a2a2a;
-            padding: 12px 15px;
+            padding: 12px 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
             border-bottom: 2px solid #7f4f24;
             transition: all 0.2s;
         }
@@ -304,7 +308,7 @@
         }
         
         .category-icon {
-            font-size: 1.2em;
+            font-size: 1.3em;
             width: 30px;
             text-align: center;
         }
@@ -320,13 +324,18 @@
         
         .category-stats {
             color: #a0a0a0;
-            font-size: 0.9em;
+            font-size: 1em;
             margin-right: 15px;
+            background-color: #1a1a1a;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid #5a5a5a;
         }
         
         .category-stats span {
             color: #ffd700;
             font-weight: bold;
+            font-size: 1.1em;
         }
         
         .category-toggle {
@@ -338,7 +347,7 @@
         
         .weapons-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 10px;
             padding: 15px;
             background-color: #1a1a1a;
@@ -350,13 +359,12 @@
         
         .weapon-card {
             background-color: #2a2a2a;
-            border: 2px solid #5a5a5a;
-            border-radius: 5px;
+            border: 1px solid #5a5a5a;
+            border-radius: 6px;
             padding: 10px;
-            display: flex;
-            align-items: center;
             transition: all 0.2s;
             cursor: pointer;
+            height: fit-content;
         }
         
         .weapon-card:hover {
@@ -384,109 +392,176 @@
         }
         
         .weapon-card.gra-weapon {
-            border-bottom: 2px solid #4a2a4a;
+            border-bottom: 3px solid #4a2a4a;
+        }
+        
+        .weapon-card.quest-complete {
+            border-left: 5px solid #2a6a2a;
+            background-color: #1a3a1a;
+        }
+        
+        .weapon-main-row {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            gap: 10px;
         }
         
         .weapon-checkbox {
-            margin-right: 10px;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
             cursor: pointer;
             accent-color: #ffd700;
+            flex-shrink: 0;
         }
         
         .weapon-info {
             flex: 1;
+            min-width: 0;
         }
         
         .weapon-name {
             font-weight: bold;
             color: #e0e0e0;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 5px;
+            font-size: 0.95em;
+            line-height: 1.3;
+            word-break: break-word;
+            margin-bottom: 4px;
         }
         
         .weapon-type {
-            font-size: 0.8em;
+            font-size: 0.75em;
             color: #a0a0a0;
             margin-top: 2px;
         }
         
+        .quest-row {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #5a5a5a;
+            gap: 8px;
+        }
+        
+        .quest-checkbox {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: #2a6a2a;
+            flex-shrink: 0;
+        }
+        
+        .quest-label {
+            font-size: 0.75em;
+            color: #a0d0a0;
+            flex: 1;
+            line-height: 1.2;
+        }
+        
+        .quest-badge-small {
+            font-size: 0.65em;
+            background-color: #2a6a2a;
+            color: #a0ffa0;
+            padding: 2px 6px;
+            border-radius: 12px;
+            display: inline-block;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .badges-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin: 4px 0 2px;
+        }
+        
+        .badge {
+            font-size: 0.65em;
+            padding: 2px 6px;
+            border-radius: 12px;
+            display: inline-block;
+            white-space: nowrap;
+            font-weight: bold;
+        }
+        
         .dlc-badge {
-            font-size: 0.7em;
             background-color: #2a4a6a;
             color: #a0d0ff;
-            padding: 2px 6px;
-            border-radius: 3px;
-            display: inline-block;
             border: 1px solid #a0d0ff;
         }
         
         .gra-badge {
-            font-size: 0.7em;
             background-color: #4a2a4a;
             color: #d4a0d4;
-            padding: 2px 6px;
-            border-radius: 3px;
-            display: inline-block;
             border: 1px solid #d4a0d4;
         }
         
         .wild-badge {
-            font-size: 0.7em;
             background-color: #4a2a0a;
             color: #d4a017;
-            padding: 2px 6px;
-            border-radius: 3px;
-            display: inline-block;
             border: 1px solid #d4a017;
         }
         
         .courier-badge {
-            font-size: 0.7em;
             background-color: #4a2a2a;
             color: #d0a0a0;
-            padding: 2px 6px;
-            border-radius: 3px;
-            display: inline-block;
             border: 1px solid #d0a0a0;
         }
         
         .quest-badge {
-            font-size: 0.7em;
             background-color: #7f4f24;
             color: #ffd700;
-            padding: 2px 6px;
-            border-radius: 3px;
-            display: inline-block;
+            border: 1px solid #ffd700;
+        }
+        
+        .quest-item-badge {
+            background-color: #5a2a2a;
+            color: #ff8a8a;
+            border: 1px solid #ff8a8a;
         }
         
         .mutex-badge {
-            font-size: 0.7em;
             background-color: #5a2a5a;
             color: #d4a0d4;
-            padding: 2px 6px;
-            border-radius: 3px;
-            display: inline-block;
             border: 1px solid #d4a0d4;
         }
         
         .footer {
             margin-top: 30px;
             text-align: center;
-            color: #6a6a6a;
+            color: #a0a0a0;
             font-size: 0.9em;
             border-top: 1px solid #3a3a3a;
             padding-top: 20px;
         }
         
+        .footer .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .footer .stat-item {
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        .footer .stat-item span {
+            color: #a0a0a0;
+            font-weight: normal;
+            margin-right: 5px;
+        }
+        
         .progress-bar {
-            height: 4px;
+            height: 6px;
             background-color: #3a3a3a;
-            border-radius: 2px;
-            margin-top: 10px;
+            border-radius: 3px;
+            margin: 15px 0 20px;
             overflow: hidden;
         }
         
@@ -501,55 +576,57 @@
             flex-wrap: wrap;
             gap: 15px;
             margin-bottom: 20px;
-            padding: 10px;
+            padding: 10px 15px;
             background-color: #2a2a2a;
-            border-radius: 5px;
+            border-radius: 8px;
             border: 1px solid #5a5a5a;
+            justify-content: center;
         }
         
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 0.85em;
+            gap: 6px;
+            font-size: 0.8em;
         }
         
         .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 3px;
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            flex-shrink: 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>☢️ FALLOUT: NEW VEGAS <span>PERMANENT UNIQUE WEAPONS TRACKER</span></h1>
+        <h1>☢️ FALLOUT: NEW VEGAS <span>UNIQUE WEAPONS TRACKER</span></h1>
         
         <div class="stats-panel">
             <div class="stat-box">
-                <div class="stat-label">TOTAL UNIQUE</div>
-                <div class="stat-value" id="totalWeapons">0</div>
-                <div class="stat-note" id="totalWeaponsNote">permanent keepers</div>
+                <div class="stat-label">TOTAL</div>
+                <div class="stat-value" id="totalWeapons">80</div>
+                <div class="stat-note" id="totalWeaponsNote">all unique</div>
             </div>
             <div class="stat-box">
                 <div class="stat-label">COLLECTED</div>
                 <div class="stat-value" id="collectedCount">0</div>
-                <div class="stat-note">✓ ticked weapons</div>
+                <div class="stat-note">✓ owned/completed</div>
             </div>
             <div class="stat-box">
-                <div class="stat-label">WILD EXCLUSIVE</div>
+                <div class="stat-label">WILD</div>
                 <div class="stat-value" id="wildWeapons">0</div>
                 <div class="stat-note">👽 perk only</div>
             </div>
             <div class="stat-box">
-                <div class="stat-label">QUEST REWARDS</div>
+                <div class="stat-label">QUEST</div>
                 <div class="stat-value" id="questWeapons">0</div>
-                <div class="stat-note">⚡ quest obtained</div>
+                <div class="stat-note">⚡ rewards</div>
             </div>
             <div class="stat-box">
-                <div class="stat-label">COLLECTION %</div>
+                <div class="stat-label">COMPLETION</div>
                 <div class="stat-value" id="collectionPercent">0%</div>
-                <div class="stat-note" id="collectionNote">of permanent</div>
+                <div class="stat-note" id="collectionNote">of 80</div>
             </div>
         </div>
         
@@ -559,26 +636,26 @@
         
         <div class="pip-boy-screen">
             <div>ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM</div>
-            <div>COPYRIGHT 2075-2077 ROBCO INDUSTRIES</div>
             <div class="scanline"></div>
-            <div id="pipBoyMessage">> Toggle Wild Wasteland to show/hide mutually exclusive weapons. Alien blaster ↔ YCS/186, Fist of Rawr ↔ Fist of the North Rawr.</div>
+            <div id="pipBoyMessage">> Track all 80 unique weapons. Quest items have completion checkboxes.</div>
         </div>
         
         <div class="legend">
-            <div class="legend-item"><span class="legend-color" style="background-color: #d4a017;"></span> Quest rewards (permanent)</div>
-            <div class="legend-item"><span class="legend-color" style="background-color: #8b5a2b;"></span> Wild Wasteland only</div>
-            <div class="legend-item"><span class="legend-color" style="background-color: #4a2a4a;"></span> Gun Runners' Arsenal</div>
-            <div class="legend-item"><span class="legend-color" style="background-color: #2a4a6a;"></span> DLC weapons</div>
+            <div class="legend-item"><span class="legend-color" style="background-color: #d4a017;"></span> Quest reward</div>
+            <div class="legend-item"><span class="legend-color" style="background-color: #2a6a2a;"></span> Quest completed</div>
+            <div class="legend-item"><span class="legend-color" style="background-color: #8b5a2b;"></span> Wild Wasteland</div>
+            <div class="legend-item"><span class="legend-color" style="background-color: #4a2a4a;"></span> GRA</div>
+            <div class="legend-item"><span class="legend-color" style="background-color: #2a4a6a;"></span> DLC</div>
             <div class="legend-item"><span class="legend-color" style="background-color: #4a2a2a;"></span> Courier's Stash</div>
-            <div class="legend-item"><span class="legend-color" style="background-color: #5a2a5a;"></span> Mutually Exclusive</div>
+            <div class="legend-item"><span class="legend-color" style="background-color: #5a2a5a;"></span> Exclusive</div>
         </div>
         
         <div class="control-bar">
             <div class="view-controls">
                 <button class="view-btn active" data-view="all">All</button>
-                <button class="view-btn" data-view="base">Base Game</button>
-                <button class="view-btn" data-view="dlc">DLC Only</button>
-                <button class="view-btn" data-view="gra">GRA Only</button>
+                <button class="view-btn" data-view="base">Base</button>
+                <button class="view-btn" data-view="dlc">DLC</button>
+                <button class="view-btn" data-view="gra">GRA</button>
             </div>
             
             <label class="wild-toggle" id="wildToggle">
@@ -586,122 +663,130 @@
                 <input type="checkbox" id="wildCheckbox">
             </label>
             
-            <input type="text" class="search-box" id="searchInput" placeholder="🔍 Search unique weapons...">
-            <button class="reset-btn" id="resetProgress">Reset Progress</button>
+            <input type="text" class="search-box" id="searchInput" placeholder="🔍 Search weapons...">
+            <button class="reset-btn" id="resetProgress">Reset</button>
         </div>
         
         <div id="perkNote" class="perk-note" style="display: none;">
             <span class="icon">👽</span>
-            <span id="perkNoteText">Wild Wasteland is ON: Alien blaster, Holy Frag Grenade, Nuka-Breaker (GRA), Fist of the North Rawr are available. YCS/186 and Fist of Rawr are not available (mutually exclusive).</span>
+            <span>Wild Wasteland ON: Alien blaster, Holy Frag Grenade, Fist of the North Rawr available</span>
         </div>
         
         <div id="warningNote" class="warning-note" style="display: none;">
             <span class="icon">⚠️</span>
-            <span id="warningNoteText">Wild Wasteland is OFF: YCS/186 and Fist of Rawr are available. Alien blaster, Holy Frag Grenade, Nuka-Breaker (GRA), Fist of the North Rawr are not available (mutually exclusive).</span>
+            <span>Wild Wasteland OFF: YCS/186 and Fist of Rawr available</span>
         </div>
         
-        <div id="categoriesContainer"></div>
+        <div class="categories-wrapper" id="categoriesContainer"></div>
         
         <div class="footer">
-            <p>🎮 Tracking permanent unique weapons only • 70 total unique weapons</p>
-            <p>📦 Categories: Unarmed • Melee • Guns • Energy • Explosive</p>
-            <p>💾 Progress auto-saves • Toggle Wild Wasteland to see mutually exclusive weapons (Alien blaster ↔ YCS/186, Fist of Rawr ↔ Fist of the North Rawr)</p>
+            <div class="stats">
+                <div class="stat-item"><span>Unarmed:</span>15</div>
+                <div class="stat-item"><span>Melee:</span>15</div>
+                <div class="stat-item"><span>Guns:</span>24</div>
+                <div class="stat-item"><span>Energy:</span>18</div>
+                <div class="stat-item"><span>Explosive:</span>8</div>
+                <div class="stat-item"><span>Total:</span>80</div>
+            </div>
+            <div>💾 Progress auto-saves • Click weapon to toggle • Quest items have completion checkbox</div>
         </div>
     </div>
 
     <script>
-        // PERMANENT UNIQUE WEAPONS ONLY - Corrected mutual exclusivity
+        // COMPLETE UNIQUE WEAPONS LIST
         const uniqueWeapons = {
-            unarmed: [
-                { name: "Cram Opener", type: "Unarmed", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Dr. Klein's glove", type: "Unarmed", dlc: "Old World Blues", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Dr. Mobius' glove", type: "Unarmed", dlc: "Old World Blues", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Embrace of the Mantis King! (GRA)", type: "Unarmed", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false },
-                { name: "Fist of Rawr", type: "Unarmed", dlc: "Lonesome Road", quest: false, wild: false, gra: false, courier: false, mutex: true }, // NOT available with WW
-                { name: "Fist of the North Rawr", type: "Unarmed", dlc: "Lonesome Road", quest: false, wild: true, gra: false, courier: false, mutex: true }, // ONLY available with WW
-                { name: "Golden Gloves", type: "Unarmed", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Greased Lightning", type: "Unarmed", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Love and Hate", type: "Unarmed", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Paladin Toaster", type: "Unarmed", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Pushy", type: "Unarmed", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Recompense of the Fallen", type: "Unarmed", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Salt-Upon-Wounds' power fist", type: "Unarmed", dlc: "Honest Hearts", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "She's Embrace", type: "Unarmed", dlc: "Honest Hearts", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Two-Step Goodbye", type: "Unarmed", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false }
+            unarmed: [ // 15 weapons
+                { name: "Cram Opener", type: "Unarmed", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Dr. Klein's glove", type: "Unarmed", dlc: "Old World Blues", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Dr. Mobius' glove", type: "Unarmed", dlc: "Old World Blues", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Embrace of the Mantis King! (GRA)", type: "Unarmed", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false, questItem: false },
+                { name: "Fist of Rawr", type: "Unarmed", dlc: "Lonesome Road", quest: false, wild: false, gra: false, courier: false, mutex: true, questItem: false },
+                { name: "Fist of the North Rawr", type: "Unarmed", dlc: "Lonesome Road", quest: false, wild: true, gra: false, courier: false, mutex: true, questItem: false },
+                { name: "Golden Gloves", type: "Unarmed", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Greased Lightning", type: "Unarmed", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Love and Hate", type: "Unarmed", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Paladin Toaster", type: "Unarmed", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Pushy", type: "Unarmed", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Recompense of the Fallen", type: "Unarmed", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Salt-Upon-Wounds' power fist", type: "Unarmed", dlc: "Honest Hearts", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "She's Embrace", type: "Unarmed", dlc: "Honest Hearts", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Two-Step Goodbye", type: "Unarmed", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false }
             ],
-            melee: [
-                { name: "Blade of the East", type: "Melee", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Blood-Nap", type: "Melee", dlc: "Lonesome Road", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Broad machete", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: true, mutex: false },
-                { name: "Chance's knife", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Chopper", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Figaro", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Gehenna", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Knock-Knock", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Liberator", type: "Melee", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Nephi's golf driver", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Nuka-Breaker", type: "Melee", dlc: "Base Game", quest: false, wild: true, gra: true, courier: false, mutex: true },
-                { name: "Oh, Baby!", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Old Glory", type: "Melee", dlc: "Lonesome Road", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "The Humble Cudgel", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "X-2 antenna", type: "Melee", dlc: "Old World Blues", quest: false, wild: false, gra: false, courier: false, mutex: false }
+            melee: [ // 15 weapons
+                { name: "Blade of the East", type: "Melee", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Blood-Nap", type: "Melee", dlc: "Lonesome Road", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Broad machete", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: true, mutex: false, questItem: false },
+                { name: "Chance's knife", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Chopper", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Figaro", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Gehenna", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Knock-Knock", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Liberator", type: "Melee", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Nephi's golf driver", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Nuka-Breaker", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false, questItem: false },
+                { name: "Oh, Baby!", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Old Glory", type: "Melee", dlc: "Lonesome Road", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "The Humble Cudgel", type: "Melee", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "X-2 antenna", type: "Melee", dlc: "Old World Blues", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false }
             ],
-            guns: [
-                { name: "A Light Shining in Darkness", type: "Pistol", dlc: "Honest Hearts", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Abilene Kid LE BB gun", type: "Pistol", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "All-American", type: "Rifle", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Big Boomer", type: "Shotgun", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Bozar", type: "Rifle", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false },
-                { name: "Christine's CoS silencer rifle", type: "Rifle", dlc: "Old World Blues", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "CZ57 Avenger", type: "Rifle", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Dinner Bell", type: "Shotgun", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Gobi Campaign scout rifle", type: "Rifle", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "La Longue Carabine", type: "Rifle", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Li'l Devil", type: "Pistol", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false },
-                { name: "Lucky", type: "Pistol", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Maria", type: "Pistol", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Medicine Stick", type: "Rifle", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false },
-                { name: "Mysterious Magnum", type: "Pistol", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Paciencia", type: "Rifle", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false },
-                { name: "Ratslayer", type: "Rifle", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Sleepytyme", type: "SMG", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false },
-                { name: "Sturdy caravan shotgun", type: "Shotgun", dlc: "Base Game", quest: false, wild: false, gra: false, courier: true, mutex: false },
-                { name: "Survivalist's rifle", type: "Rifle", dlc: "Honest Hearts", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "That Gun", type: "Pistol", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "This Machine", type: "Rifle", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Vance's 9mm SMG", type: "SMG", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Weathered 10mm pistol", type: "Pistol", dlc: "Base Game", quest: false, wild: false, gra: false, courier: true, mutex: false }
+            guns: [ // 24 weapons
+                { name: "A Light Shining in Darkness", type: "Pistol", dlc: "Honest Hearts", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Abilene Kid LE BB gun", type: "Pistol", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "All-American", type: "Rifle", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Big Boomer", type: "Shotgun", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Bozar", type: "Rifle", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false, questItem: false },
+                { name: "Christine's CoS silencer rifle", type: "Rifle", dlc: "Old World Blues", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "CZ57 Avenger", type: "Rifle", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Dinner Bell", type: "Shotgun", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Gobi Campaign scout rifle", type: "Rifle", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "La Longue Carabine", type: "Rifle", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Li'l Devil", type: "Pistol", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false, questItem: false },
+                { name: "Lucky", type: "Pistol", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Maria", type: "Pistol", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Medicine Stick", type: "Rifle", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false, questItem: false },
+                { name: "Mysterious Magnum", type: "Pistol", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Paciencia", type: "Rifle", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false, questItem: false },
+                { name: "Ratslayer", type: "Rifle", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Sleepytyme", type: "SMG", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false, questItem: false },
+                { name: "Sturdy caravan shotgun", type: "Shotgun", dlc: "Base Game", quest: false, wild: false, gra: false, courier: true, mutex: false, questItem: false },
+                { name: "Survivalist's rifle", type: "Rifle", dlc: "Honest Hearts", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "That Gun", type: "Pistol", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "This Machine", type: "Rifle", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Vance's 9mm SMG", type: "SMG", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Weathered 10mm pistol", type: "Pistol", dlc: "Base Game", quest: false, wild: false, gra: false, courier: true, mutex: false, questItem: false }
             ],
-            energy: [
-                { name: "AER14 prototype", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Alien blaster", type: "Energy", dlc: "Base Game", quest: false, wild: true, gra: false, courier: false, mutex: true },
-                { name: "Cleansing Flame", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false },
-                { name: "Compliance Regulator", type: "Energy", dlc: "Honest Hearts", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Elijah's jury-rigged Tesla cannon", type: "Energy", dlc: "Old World Blues", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Euclid's C-Finder", type: "Energy", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Holorifle", type: "Energy", dlc: "Dead Money", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "MF Hyperbreeder Alpha", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false },
-                { name: "Pew Pew", type: "Energy", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Pulse gun", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Q-35 matter modulator", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Sprtel-Wood 9700", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false },
-                { name: "Tesla-Beaton prototype", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "The Smitty Special", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false },
-                { name: "YCS/186", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: true }
+            energy: [ // 18 weapons
+                { name: "AER14 prototype", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Alien blaster", type: "Energy", dlc: "Base Game", quest: false, wild: true, gra: false, courier: false, mutex: true, questItem: false },
+                { name: "Cleansing Flame", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false, questItem: false },
+                { name: "Compliance Regulator", type: "Energy", dlc: "Honest Hearts", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Elijah's jury-rigged Tesla cannon", type: "Energy", dlc: "Old World Blues", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Euclid's C-Finder", type: "Energy", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Holorifle", type: "Energy", dlc: "Dead Money", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "MF Hyperbreeder Alpha", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false, questItem: false },
+                { name: "Missing laser pistol", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: true },
+                { name: "Pew Pew", type: "Energy", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Pulse gun", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Q-35 matter modulator", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Sprtel-Wood 9700", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false, questItem: false },
+                { name: "Tesla-Beaton prototype", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "The Smitty Special", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false, questItem: false },
+                { name: "Van Graff laser rifle", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: true },
+                { name: "Van Graff plasma rifle", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: true },
+                { name: "YCS/186", type: "Energy", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: true, questItem: false }
             ],
-            explosive: [
-                { name: "Esther", type: "Explosive", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false },
-                { name: "Great Bear grenade rifle", type: "Explosive", dlc: "Lonesome Road", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Red Victory grenade rifle", type: "Explosive", dlc: "Lonesome Road", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Mercenary's grenade rifle", type: "Explosive", dlc: "Base Game", quest: false, wild: false, gra: false, courier: true, mutex: false },
-                { name: "Thump-Thump", type: "Explosive", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Mercy", type: "Explosive", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Annabelle", type: "Explosive", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false },
-                { name: "Holy Frag Grenade", type: "Explosive", dlc: "Base Game", quest: false, wild: true, gra: false, courier: false, mutex: true }
+            explosive: [ // 8 weapons
+                { name: "Esther", type: "Explosive", dlc: "Base Game", quest: false, wild: false, gra: true, courier: false, mutex: false, questItem: false },
+                { name: "Great Bear grenade rifle", type: "Explosive", dlc: "Lonesome Road", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Red Victory grenade rifle", type: "Explosive", dlc: "Lonesome Road", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Mercenary's grenade rifle", type: "Explosive", dlc: "Base Game", quest: false, wild: false, gra: false, courier: true, mutex: false, questItem: false },
+                { name: "Thump-Thump", type: "Explosive", dlc: "Base Game", quest: true, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Mercy", type: "Explosive", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Annabelle", type: "Explosive", dlc: "Base Game", quest: false, wild: false, gra: false, courier: false, mutex: false, questItem: false },
+                { name: "Holy Frag Grenade", type: "Explosive", dlc: "Base Game", quest: false, wild: true, gra: false, courier: false, mutex: true, questItem: false }
             ]
         };
 
-        // Category display names and icons
         const categoryInfo = {
             unarmed: { name: "UNARMED WEAPONS", icon: "👊", order: 1 },
             melee: { name: "MELEE WEAPONS", icon: "🔪", order: 2 },
@@ -710,303 +795,244 @@
             explosive: { name: "EXPLOSIVE WEAPONS", icon: "💣", order: 5 }
         };
 
-        // App state
         let collectedWeapons = new Set();
+        let questCompleted = new Set();
         let currentView = 'all';
         let searchTerm = '';
         let wildWastelandEnabled = false;
         let collapsedCategories = new Set();
 
-        // Load saved progress
+        const TOTAL_WEAPONS = 80;
+
         function loadProgress() {
-            const saved = localStorage.getItem('fnvUniquePermanent');
-            if (saved) {
-                collectedWeapons = new Set(JSON.parse(saved));
-            }
+            const saved = localStorage.getItem('fnvFinal');
+            if (saved) collectedWeapons = new Set(JSON.parse(saved));
             
-            const wildSetting = localStorage.getItem('fnvUniqueWildPermanent');
+            const questSaved = localStorage.getItem('fnvQuestFinal');
+            if (questSaved) questCompleted = new Set(JSON.parse(questSaved));
+            
+            const wildSetting = localStorage.getItem('fnvWildFinal');
             if (wildSetting !== null) {
                 wildWastelandEnabled = wildSetting === 'true';
                 document.getElementById('wildCheckbox').checked = wildWastelandEnabled;
             }
             
-            const collapsedSaved = localStorage.getItem('fnvUniqueCollapsedPermanent');
-            if (collapsedSaved) {
-                collapsedCategories = new Set(JSON.parse(collapsedSaved));
-            }
+            const collapsedSaved = localStorage.getItem('fnvCollapsedFinal');
+            if (collapsedSaved) collapsedCategories = new Set(JSON.parse(collapsedSaved));
         }
 
-        // Save progress
         function saveProgress() {
-            localStorage.setItem('fnvUniquePermanent', JSON.stringify([...collectedWeapons]));
-            localStorage.setItem('fnvUniqueWildPermanent', wildWastelandEnabled);
-            localStorage.setItem('fnvUniqueCollapsedPermanent', JSON.stringify([...collapsedCategories]));
+            localStorage.setItem('fnvFinal', JSON.stringify([...collectedWeapons]));
+            localStorage.setItem('fnvQuestFinal', JSON.stringify([...questCompleted]));
+            localStorage.setItem('fnvWildFinal', wildWastelandEnabled);
+            localStorage.setItem('fnvCollapsedFinal', JSON.stringify([...collapsedCategories]));
         }
 
-        // Reset all progress
         function resetProgress() {
-            if (confirm('Reset all unique weapon collection progress?')) {
+            if (confirm('Reset all progress?')) {
                 collectedWeapons.clear();
+                questCompleted.clear();
                 saveProgress();
                 renderCategories();
                 updateStats();
-                document.getElementById('pipBoyMessage').innerHTML = '> Progress reset. All unique weapons marked as uncollected.';
+                document.getElementById('pipBoyMessage').innerHTML = '> Progress reset.';
             }
         }
 
-        // Check if weapon is available based on Wild Wasteland setting
         function isWeaponAvailable(weapon) {
-            // Weapons that require Wild Wasteland
-            if (weapon.wild) {
-                return wildWastelandEnabled;
-            }
-            
-            // YCS/186 is NOT available when Wild Wasteland is ON (replaced by Alien blaster)
-            if (weapon.name === "YCS/186" && wildWastelandEnabled) {
-                return false;
-            }
-            
-            // Fist of Rawr is NOT available when Wild Wasteland is ON (replaced by Fist of the North Rawr)
-            if (weapon.name === "Fist of Rawr" && wildWastelandEnabled) {
-                return false;
-            }
-            
-            // All other weapons are always available
+            if (weapon.wild) return wildWastelandEnabled;
+            if (weapon.name === "YCS/186" && wildWastelandEnabled) return false;
+            if (weapon.name === "Fist of Rawr" && wildWastelandEnabled) return false;
             return true;
         }
 
-        // Get visible weapons based on filters
+        function isWeaponCollected(weaponId, weapon) {
+            if (collectedWeapons.has(weaponId)) return true;
+            if (weapon.questItem && questCompleted.has(weaponId)) return true;
+            return false;
+        }
+
         function getVisibleWeapons() {
             const visible = {};
-            
             Object.keys(uniqueWeapons).forEach(category => {
                 visible[category] = uniqueWeapons[category].filter(weapon => {
-                    // Filter by availability based on Wild Wasteland
                     if (!isWeaponAvailable(weapon)) return false;
-                    
-                    // Filter by search
                     if (searchTerm && !weapon.name.toLowerCase().includes(searchTerm.toLowerCase())) return false;
-                    
-                    // Filter by view
                     if (currentView === 'base' && weapon.dlc !== 'Base Game') return false;
                     if (currentView === 'dlc' && weapon.dlc === 'Base Game') return false;
                     if (currentView === 'gra' && !weapon.gra) return false;
-                    
                     return true;
                 });
             });
-            
             return visible;
         }
 
-        // Calculate statistics
         function updateStats() {
             const visible = getVisibleWeapons();
-            
-            let totalWeapons = 0;
-            let wildWeapons = 0;
-            let questWeapons = 0;
-            let collectedCount = 0;
+            let total = 0, wild = 0, quest = 0, collected = 0;
             
             Object.keys(visible).forEach(category => {
                 visible[category].forEach(weapon => {
-                    totalWeapons++;
-                    if (weapon.wild) wildWeapons++;
-                    if (weapon.quest) questWeapons++;
-                    
-                    const weaponId = getWeaponId(category, weapon.name);
-                    if (collectedWeapons.has(weaponId)) {
-                        collectedCount++;
-                    }
+                    total++;
+                    if (weapon.wild) wild++;
+                    if (weapon.quest) quest++;
+                    if (isWeaponCollected(getWeaponId(category, weapon.name), weapon)) collected++;
                 });
             });
             
-            const collectionPercent = totalWeapons > 0 ? Math.round((collectedCount / totalWeapons) * 100) : 0;
+            const percent = Math.round((collected / total) * 100) || 0;
             
-            document.getElementById('totalWeapons').textContent = totalWeapons;
-            document.getElementById('wildWeapons').textContent = wildWeapons;
-            document.getElementById('questWeapons').textContent = questWeapons;
-            document.getElementById('collectedCount').textContent = collectedCount;
-            document.getElementById('collectionPercent').textContent = collectionPercent + '%';
-            document.getElementById('progressFill').style.width = collectionPercent + '%';
-            
+            document.getElementById('totalWeapons').textContent = total;
+            document.getElementById('wildWeapons').textContent = wild;
+            document.getElementById('questWeapons').textContent = quest;
+            document.getElementById('collectedCount').textContent = collected;
+            document.getElementById('collectionPercent').textContent = percent + '%';
+            document.getElementById('progressFill').style.width = percent + '%';
             document.getElementById('totalWeaponsNote').textContent = wildWastelandEnabled ? '(WW on)' : '(WW off)';
             
-            // Update perk notes
-            const perkNote = document.getElementById('perkNote');
-            const warningNote = document.getElementById('warningNote');
-            
-            if (wildWastelandEnabled) {
-                perkNote.style.display = 'flex';
-                warningNote.style.display = 'none';
-            } else {
-                perkNote.style.display = 'none';
-                warningNote.style.display = 'flex';
-            }
-            
-            // Update Pip-Boy message
-            let message = '> ';
-            if (collectionPercent === 0) message += 'Time to hunt for unique weapons, courier!';
-            else if (collectionPercent < 30) message += 'Building your unique collection. Keep exploring!';
-            else if (collectionPercent < 60) message += 'Impressive unique collection. The rare ones are calling.';
-            else if (collectionPercent < 90) message += 'Almost there! Hunt down those last unique weapons.';
-            else if (collectionPercent === 100) message += 'COMPLETE! You\'ve collected every unique weapon available with this perk setup!';
-            
-            document.getElementById('pipBoyMessage').innerHTML = message;
+            document.getElementById('perkNote').style.display = wildWastelandEnabled ? 'flex' : 'none';
+            document.getElementById('warningNote').style.display = wildWastelandEnabled ? 'none' : 'flex';
         }
 
-        // Generate unique ID for weapon
-        function getWeaponId(category, weaponName) {
-            return `${category}:${weaponName}`;
+        function getWeaponId(category, name) {
+            return `${category}:${name}`;
         }
 
-        // Render categories and weapons
         function renderCategories() {
             const container = document.getElementById('categoriesContainer');
             const visible = getVisibleWeapons();
-            
             let html = '';
             
-            // Sort categories by order
-            const sortedCategories = Object.keys(categoryInfo).sort((a, b) => 
-                categoryInfo[a].order - categoryInfo[b].order
-            );
-            
-            sortedCategories.forEach(category => {
+            Object.keys(categoryInfo).sort((a,b) => categoryInfo[a].order - categoryInfo[b].order).forEach(category => {
                 const weapons = visible[category];
-                if (!weapons || weapons.length === 0) return;
+                if (!weapons?.length) return;
                 
-                const categoryDisplay = categoryInfo[category];
-                const isCollapsed = collapsedCategories.has(category);
+                const cat = categoryInfo[category];
+                const collapsed = collapsedCategories.has(category);
+                const total = weapons.length;
+                const collected = weapons.filter(w => isWeaponCollected(getWeaponId(category, w.name), w)).length;
                 
-                // Calculate category stats
-                const totalInCategory = weapons.length;
-                const collectedInCategory = weapons.filter(w => 
-                    collectedWeapons.has(getWeaponId(category, w.name))
-                ).length;
+                html += `<div class="category-section ${collapsed ? 'collapsed' : ''}" data-category="${category}">
+                    <div class="category-header">
+                        <span class="category-icon">${cat.icon}</span>
+                        <span class="category-title">${cat.name}</span>
+                        <span class="category-stats"><span>${collected}</span>/${total}</span>
+                        <span class="category-toggle">${collapsed ? '▼' : '▲'}</span>
+                    </div>
+                    <div class="weapons-grid">`;
                 
-                html += `
-                    <div class="category-section ${isCollapsed ? 'collapsed' : ''}" data-category="${category}">
-                        <div class="category-header">
-                            <span class="category-icon">${categoryDisplay.icon}</span>
-                            <span class="category-title">${categoryDisplay.name}</span>
-                            <span class="category-stats">
-                                <span>${collectedInCategory}</span>/${totalInCategory}
-                            </span>
-                            <span class="category-toggle">${isCollapsed ? '▼' : '▲'}</span>
-                        </div>
-                        <div class="weapons-grid">
-                `;
-                
-                // Sort weapons alphabetically
-                const sortedWeapons = [...weapons].sort((a, b) => a.name.localeCompare(b.name));
-                
-                sortedWeapons.forEach(weapon => {
-                    const weaponId = getWeaponId(category, weapon.name);
-                    const isCollected = collectedWeapons.has(weaponId);
+                [...weapons].sort((a,b) => a.name.localeCompare(b.name)).forEach(w => {
+                    const id = getWeaponId(category, w.name);
+                    const isCollected = isWeaponCollected(id, w);
+                    const isQuestItem = w.questItem;
                     
-                    let cardClasses = 'weapon-card';
-                    if (isCollected) cardClasses += ' collected';
-                    if (weapon.quest) cardClasses += ' quest-weapon';
-                    if (weapon.wild) cardClasses += ' wild-weapon';
-                    if (weapon.gra) cardClasses += ' gra-weapon';
+                    let classes = 'weapon-card';
+                    if (isCollected) classes += ' collected';
+                    if (w.quest) classes += ' quest-weapon';
+                    if (w.wild) classes += ' wild-weapon';
+                    if (w.gra) classes += ' gra-weapon';
+                    if (questCompleted.has(id)) classes += ' quest-complete';
                     
-                    let badges = '';
-                    if (weapon.quest) badges += '<span class="quest-badge">QUEST</span>';
-                    if (weapon.wild) badges += '<span class="wild-badge">WILD</span>';
-                    if (weapon.gra) badges += '<span class="gra-badge">GRA</span>';
-                    if (weapon.courier) badges += '<span class="courier-badge">COURIER</span>';
-                    if (weapon.mutex) badges += '<span class="mutex-badge">EXCLUSIVE</span>';
-                    if (weapon.dlc !== 'Base Game') badges += `<span class="dlc-badge">${weapon.dlc}</span>`;
+                    let badges = [];
+                    if (w.quest) badges.push('<span class="badge quest-badge">QUEST</span>');
+                    if (w.wild) badges.push('<span class="badge wild-badge">WILD</span>');
+                    if (w.gra) badges.push('<span class="badge gra-badge">GRA</span>');
+                    if (w.courier) badges.push('<span class="badge courier-badge">COURIER</span>');
+                    if (w.mutex) badges.push('<span class="badge mutex-badge">EXCLUSIVE</span>');
+                    if (w.questItem) badges.push('<span class="badge quest-item-badge">QUEST ITEM</span>');
+                    if (w.dlc !== 'Base Game') badges.push(`<span class="badge dlc-badge">${w.dlc}</span>`);
                     
-                    html += `
-                        <div class="${cardClasses}" data-weapon-id="${weaponId}">
-                            <input type="checkbox" class="weapon-checkbox" 
-                                   ${isCollected ? 'checked' : ''} 
-                                   data-weapon-id="${weaponId}">
+                    html += `<div class="${classes}" data-id="${id}">
+                        <div class="weapon-main-row">
+                            <input type="checkbox" class="weapon-checkbox" ${collectedWeapons.has(id) ? 'checked' : ''} data-id="${id}">
                             <div class="weapon-info">
-                                <span class="weapon-name">
-                                    ${weapon.name}
-                                    ${badges}
-                                </span>
-                                <div class="weapon-type">${weapon.type}</div>
+                                <span class="weapon-name">${w.name}</span>
+                                ${badges.length ? `<div class="badges-container">${badges.join('')}</div>` : ''}
+                                <div class="weapon-type">${w.type}</div>
                             </div>
-                        </div>
-                    `;
+                        </div>`;
+                    
+                    if (isQuestItem) {
+                        html += `<div class="quest-row">
+                            <input type="checkbox" class="quest-checkbox" id="q-${id.replace(/[^a-z]/gi,'')}" ${questCompleted.has(id) ? 'checked' : ''} data-quest="${id}">
+                            <label for="q-${id.replace(/[^a-z]/gi,'')}" class="quest-label">Quest completed</label>
+                            <span class="quest-badge-small">✓</span>
+                        </div>`;
+                    }
+                    
+                    html += `</div>`;
                 });
                 
-                html += `
-                        </div>
-                    </div>
-                `;
+                html += `</div></div>`;
             });
             
             container.innerHTML = html;
-            
-            // Add event listeners
-            addEventListeners();
+            attachEvents();
         }
 
-        // Add event listeners to weapons and categories
-        function addEventListeners() {
-            // Category header clicks
-            document.querySelectorAll('.category-header').forEach(header => {
-                header.addEventListener('click', function(e) {
+        function attachEvents() {
+            document.querySelectorAll('.category-header').forEach(h => {
+                h.addEventListener('click', function(e) {
                     const section = this.closest('.category-section');
-                    const category = section.dataset.category;
-                    
-                    if (collapsedCategories.has(category)) {
-                        collapsedCategories.delete(category);
-                    } else {
-                        collapsedCategories.add(category);
-                    }
-                    
+                    const cat = section.dataset.category;
+                    collapsedCategories.has(cat) ? collapsedCategories.delete(cat) : collapsedCategories.add(cat);
                     section.classList.toggle('collapsed');
-                    const toggle = this.querySelector('.category-toggle');
-                    toggle.textContent = section.classList.contains('collapsed') ? '▼' : '▲';
-                    
+                    this.querySelector('.category-toggle').textContent = section.classList.contains('collapsed') ? '▼' : '▲';
                     saveProgress();
                 });
             });
             
-            // Checkbox changes
-            document.querySelectorAll('.weapon-checkbox').forEach(checkbox => {
-                checkbox.addEventListener('change', function(e) {
+            document.querySelectorAll('.weapon-checkbox').forEach(cb => {
+                cb.addEventListener('change', function(e) {
                     e.stopPropagation();
-                    const weaponId = this.dataset.weaponId;
-                    const card = this.closest('.weapon-card');
-                    
+                    const id = this.dataset.id;
                     if (this.checked) {
-                        collectedWeapons.add(weaponId);
-                        card.classList.add('collected');
-                        document.getElementById('pipBoyMessage').innerHTML = `> Collected: ${weaponId.split(':')[1]}`;
+                        collectedWeapons.add(id);
+                        this.closest('.weapon-card').classList.add('collected');
                     } else {
-                        collectedWeapons.delete(weaponId);
-                        card.classList.remove('collected');
-                        document.getElementById('pipBoyMessage').innerHTML = `> Removed: ${weaponId.split(':')[1]}`;
+                        collectedWeapons.delete(id);
+                        this.closest('.weapon-card').classList.remove('collected');
                     }
-                    
                     saveProgress();
                     updateStats();
-                    renderCategories(); // Re-render to update category counts
+                    renderCategories();
                 });
             });
             
-            // Card clicks (for toggling)
+            document.querySelectorAll('.quest-checkbox').forEach(cb => {
+                cb.addEventListener('change', function(e) {
+                    e.stopPropagation();
+                    const id = this.dataset.quest;
+                    if (this.checked) {
+                        questCompleted.add(id);
+                        this.closest('.weapon-card').classList.add('quest-complete');
+                    } else {
+                        questCompleted.delete(id);
+                        this.closest('.weapon-card').classList.remove('quest-complete');
+                    }
+                    saveProgress();
+                    updateStats();
+                    renderCategories();
+                });
+            });
+            
             document.querySelectorAll('.weapon-card').forEach(card => {
                 card.addEventListener('click', function(e) {
-                    if (e.target.type !== 'checkbox') {
-                        const checkbox = this.querySelector('.weapon-checkbox');
-                        checkbox.checked = !checkbox.checked;
-                        checkbox.dispatchEvent(new Event('change'));
+                    if (e.target.type === 'checkbox') return;
+                    const cb = this.querySelector('.weapon-checkbox');
+                    if (cb) {
+                        cb.checked = !cb.checked;
+                        cb.dispatchEvent(new Event('change'));
                     }
                 });
             });
+            
+            document.querySelectorAll('.quest-row').forEach(row => {
+                row.addEventListener('click', e => e.stopPropagation());
+            });
         }
 
-        // Initialize controls
         function initControls() {
-            // View buttons
             document.querySelectorAll('.view-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
@@ -1017,37 +1043,30 @@
                 });
             });
             
-            // Search
             document.getElementById('searchInput').addEventListener('input', function() {
                 searchTerm = this.value;
                 renderCategories();
                 updateStats();
             });
             
-            // Wild Wasteland toggle
-            const wildCheckbox = document.getElementById('wildCheckbox');
-            const wildToggle = document.getElementById('wildToggle');
-            
-            wildCheckbox.addEventListener('change', function() {
+            document.getElementById('wildCheckbox').addEventListener('change', function() {
                 wildWastelandEnabled = this.checked;
                 saveProgress();
                 renderCategories();
                 updateStats();
             });
             
-            wildToggle.addEventListener('click', function(e) {
+            document.getElementById('wildToggle').addEventListener('click', function(e) {
                 if (e.target.type !== 'checkbox') {
-                    const checkbox = document.getElementById('wildCheckbox');
-                    checkbox.checked = !checkbox.checked;
-                    checkbox.dispatchEvent(new Event('change'));
+                    const cb = document.getElementById('wildCheckbox');
+                    cb.checked = !cb.checked;
+                    cb.dispatchEvent(new Event('change'));
                 }
             });
             
-            // Reset button
             document.getElementById('resetProgress').addEventListener('click', resetProgress);
         }
 
-        // Initialize
         function init() {
             loadProgress();
             initControls();
@@ -1055,7 +1074,6 @@
             updateStats();
         }
 
-        // Start
         init();
     </script>
 </body>
